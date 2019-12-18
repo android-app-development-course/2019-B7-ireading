@@ -1,14 +1,27 @@
 apply plugin: 'com.android.application'
-
+//apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'android-aspectjx' //添加这一行
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.example.ireading"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+//        javaCompileOptions {
+//            // 显式声明支持注解
+//            annotationProcessorOptions {
+//                includeCompileClasspath true
+//            }
+//        }
+//
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,7 +41,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.0.0'
     implementation 'androidx.navigation:navigation-ui:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    implementation 'com.github.zincPower:JPermission:0.5'
+    implementation files('robobinding')
+    implementation 'org.robobinding:robobinding:0.8.14'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 }

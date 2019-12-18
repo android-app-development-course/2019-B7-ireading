@@ -1,64 +1,58 @@
 package com.example.ireading;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+    }
+
+    //声明一个long类型变量：用于存放上一点击“返回键”的时刻
+    private long mExitTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //判断用户是否点击了“返回键”
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //与上次点击返回键时刻作差
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                //大于2000ms则认为是误操作，使用Toast进行提示
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                //并记录下本次点击“返回键”的时刻，以便下次进行判断
+                mExitTime = System.currentTimeMillis();
+            } else {
+                //小于2000ms则认为是用户确实希望退出程序-调用System.exit()方法进行退出
+                System.exit(0);
             }
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    @OnClick(R.id.fab)
+    public void click() {
+        Toast.makeText(this, "点击", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+
 }
