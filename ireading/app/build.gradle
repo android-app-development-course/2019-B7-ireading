@@ -11,18 +11,21 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-//        javaCompileOptions {
-//            // 显式声明支持注解
-//            annotationProcessorOptions {
-//                includeCompileClasspath true
-//            }
-//        }
-//
+        javaCompileOptions {
+            annotationProcessorOptions {
+                 arguments = ["room.schemaLocation":
+                 "$projectDir/schemas".toString()]
+            }
+        }
+
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        androidTest.assets.srcDirs +=files("$projectDir/schemas").toString()
     }
     buildTypes {
         release {
@@ -50,4 +53,8 @@ dependencies {
     implementation files('robobinding')
     implementation 'org.robobinding:robobinding:0.8.14'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation "androidx.room:room-common:2.2.3"
+    testImplementation 'androidx.room:room-testing:2.2.3'
+    implementation 'androidx.room:room-runtime:2.2.3'
+    annotationProcessor 'androidx.room:room-compiler:2.2.3'
 }

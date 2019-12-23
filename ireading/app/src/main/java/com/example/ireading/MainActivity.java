@@ -7,26 +7,27 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        // Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
     }
 
     //声明一个long类型变量：用于存放上一点击“返回键”的时刻
     private long mExitTime;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //判断用户是否点击了“返回键”
@@ -46,13 +47,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
 
-    @OnClick(R.id.fab)
-    public void click() {
-        Toast.makeText(this, "点击", Toast.LENGTH_SHORT).show();
-    }
 
 
 }
