@@ -1,4 +1,5 @@
-package com.example.ireading.adapter;
+
+package com.example.ireading.view;
 
 import android.view.LayoutInflater;
 import android.view.View;

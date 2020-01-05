@@ -57,4 +57,16 @@ dependencies {
     testImplementation 'androidx.room:room-testing:2.2.3'
     implementation 'androidx.room:room-runtime:2.2.3'
     annotationProcessor 'androidx.room:room-compiler:2.2.3'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation files('libs/jsoup-1.10.2.jar')
+    implementation files('libs/cpdetector_1.0.10.jar')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation files('libs/jsoup-1.10.2.jar')
+    implementation files('libs/cpdetector_1.0.10.jar')
+
+//    // Rx
+//    implementation 'io.reactivex:rxandroid:1.1.0'
+//    implementation 'io.reactivex:rxjava:1.1.5'
 }

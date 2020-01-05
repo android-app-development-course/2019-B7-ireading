@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingHorizontal="10dp"
-        android:text="盾之勇者成名录"
+        android:text="@string/add_bookmark"
         android:textColor="#fff"
         android:textSize="18sp" />
 </LinearLayout>

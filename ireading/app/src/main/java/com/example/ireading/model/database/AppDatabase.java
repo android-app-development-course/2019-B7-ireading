@@ -22,7 +22,7 @@ public abstract class AppDatabase extends RoomDatabase {
         // bug: 在fragment使用该单例，将fragment的getActivity()作为参数传进来，然后报了以下异常
         // Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.content.Context android.content.Context.getApplicationContext()' on a null object reference
         // at com.example.ireading.model.database.AppDatabase.getDatabase(AppDatabase.java:27)
-        // at com.example.ireading.ListBookFragment.<init>(ListBookFragment.java:42)
+        // at com.example.ireading.ui.fragment.ListBookFragment.<init>(ListBookFragment.java:42)
         // 	... 34 more
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
